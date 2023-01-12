@@ -14,8 +14,8 @@ axios
     $('img', html).each(function () {
       const url = $(this).attr('src');
       urls.push(url);
-      console.log(urls.slice(1, 2));
     });
+    console.log(urls.slice(0, 10));
   })
   .catch(function (error) {
     // handle error

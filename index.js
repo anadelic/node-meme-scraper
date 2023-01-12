@@ -1,5 +1,5 @@
 import * as fs from 'node:fs';
-import * as http from 'node:https';
+import * as https from 'node:https';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
@@ -32,18 +32,14 @@ axios
       urls.push(url);
     });
     const someImgs = urls.slice(0, 10);
-
-    someImgs.forEach(
-      function (currentLink) {
-        const image = currentLink;
-      },
-      function download(url, filePath) {
-        http.get(url, (res) => {
-          res.pipe(fs.createWriteStream(memesFolder));
-        });
-        download(image, memesFolder);
-      },
-    );
+    for (let i = 0; i < 10; i++) {
+      const img = someImgs[i];
+      https.get(img, (res) => {
+        const path = `memes/0${i + 1}.jpg`;
+        res.pipe(fs.createWriteStream(path));
+      });
+    }
+    console.log('Downloading is finished');
   })
   .catch(function (error) {
     // handle error

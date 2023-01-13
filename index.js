@@ -1,5 +1,3 @@
-// dependencies
-
 import * as fs from 'node:fs';
 import * as https from 'node:https';
 import axios from 'axios';

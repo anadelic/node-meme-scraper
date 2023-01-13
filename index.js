@@ -1,7 +1,10 @@
+// dependencies
+
 import * as fs from 'node:fs';
 import * as https from 'node:https';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import cliProgress from 'cli-progress';
 
 // main url
 
@@ -47,3 +50,12 @@ axios
   .catch(function (error) {
     console.log(error);
   });
+
+// Making a progress bar
+
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+bar1.start(100, 0, {
+  speed: 'N/A',
+});
+bar1.update(100);
+bar1.stop();

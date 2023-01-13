@@ -49,11 +49,4 @@ axios
     console.log(error);
   });
 
-// Making a progress bar
 
-const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-bar1.start(100, 0, {
-  speed: 'N/A',
-});
-bar1.update(100);
-bar1.stop();

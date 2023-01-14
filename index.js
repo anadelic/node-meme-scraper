@@ -8,10 +8,14 @@ import cliProgress from 'cli-progress';
 
 const websiteUrl = 'https://memegen-link-examples-upleveled.netlify.app/';
 
+// progress bar
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+
 // making a folder
 
 const memesFolder = './memes';
 
+bar1.start(200, 0);
 try {
   if (!fs.existsSync(memesFolder)) {
     fs.mkdirSync(memesFolder);
@@ -33,6 +37,8 @@ axios
       const url = $(this).attr('src');
       urls.push(url);
     });
+    bar1.update(100);
+
     // slicing 10 urls
     const someImgs = urls.slice(0, 10);
     // downloading and putting in the folder
@@ -43,17 +49,10 @@ axios
         res.pipe(fs.createWriteStream(path));
       });
     }
-    console.log('Downloading is finished');
+    bar1.update(200);
+    bar1.stop();
+    console.log('Downloading is finished.');
   }) // handle error
   .catch(function (error) {
     console.log(error);
   });
-
-// Making a progress bar
-
-const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-bar1.start(100, 0, {
-  speed: 'N/A',
-});
-bar1.update(100);
-bar1.stop();
